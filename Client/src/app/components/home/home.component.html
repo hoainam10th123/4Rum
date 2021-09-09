@@ -1,0 +1,33 @@
+<div class="card border-success margin-bottom" *ngFor="let item of questions">
+    <div class="card-header">
+        <div class="d-flex">
+            <div>
+                <img src="{{item.photoUrl || './assets/user.png'}}" class="rounded-circle" alt=""
+                    tooltip="{{item.displayName}}" placement="right">
+            </div>
+            <div class="text-truncate">
+                <h6 class="card-title" style="margin-bottom: 0px;" tooltip="{{item.tittle}}" placement="top">
+                    <a routerLink="/detail/{{item.id}}">{{item.tittle}}</a>
+                </h6>
+                <div class="text-muted" tooltip="{{item.datePosted | date: 'd/M/yyyy, h:mm a'}}" placement="top">{{item.datePosted | shortDate}}</div>
+            </div>
+        </div>
+    </div>
+    <div class="card-body" *ngIf="item.questionTags.length > 0">
+        <span class="bg-info margin-right text-white pd-5"
+            *ngFor="let tag of item.questionTags">{{tag.laguageName}}</span>
+    </div>
+    <div class="card-footer">
+        <span class="bg-success text-white pd-5 margin-right">{{item.viewCount | viewNumber}} lượt xem</span>
+        <span class="bg-success text-white pd-5 margin-right">{{item.countCommentParents}} trả lời</span>
+    </div>
+</div>
+
+<br />
+<div class="d-flex justify-content-center" *ngIf="pagination">
+    <pagination [boundaryLinks]="true" [maxSize]="maxSize" [totalItems]="pagination.totalItems"
+        [itemsPerPage]="pagination.itemsPerPage" [(ngModel)]="pagination.currentPage"
+        (pageChanged)="pageChanged($event)" previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;"
+        lastText="&raquo;">
+    </pagination>
+</div>

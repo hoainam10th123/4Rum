@@ -1,0 +1,24 @@
+span{
+    border-radius: 5px;
+    display: inline-block;
+}
+
+.pd-5{
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+a{
+    text-decoration: none;
+}
+
+.non-list-style{
+    list-style: none;
+    padding-left: 0px;
+}
+
+
+.child-right{
+    margin-left: auto;
+    order: 2;
+}

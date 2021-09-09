@@ -1,0 +1,20 @@
+<div class="modal-header">
+    <h4 class="modal-title pull-left text-primary">Trả lời</h4>
+    <button type="button" class="close pull-right btn btn-danger" aria-label="Close" (click)="bsModalRef.hide()">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="modal-body" style="max-height: 450px; overflow-y: scroll;">
+    <form id=form #form="ngForm" (ngSubmit)="save()" novalidate>                
+        <div class="mb-3">
+            <textarea class="form-control" rows="5" name="markdown"
+            [(ngModel)]="markdown">
+        </textarea>            
+        </div>
+        <markdown [data]="markdown"></markdown>        
+    </form>
+</div>
+<div class="modal-footer">
+    <button [disabled]="!form.dirty" form="form" type="submit" class="btn btn-primary">Lưu</button> 
+    <button type="button" class="btn btn-secondary" (click)="bsModalRef.hide()">Đóng</button>
+</div>

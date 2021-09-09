@@ -1,0 +1,9 @@
+<div class="d-flex justify-content-center" *ngIf="error">
+    <div class="card text-white bg-danger mb-3" style="max-width: 80%;">
+        <div class="card-header">500 Internal server error!</div>
+        <div class="card-body">
+            <h5 class="card-title">Error: {{error.message}}</h5>
+            <p class="card-text">{{error.details}}</p>
+        </div>
+    </div>
+</div>

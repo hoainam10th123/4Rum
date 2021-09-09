@@ -1,0 +1,16 @@
+/* You can add global styles to this file, and also import other style files */
+.margin-right{
+    margin-right: 5px;
+}
+
+.margin{
+    margin: 5px;
+}
+
+.margin-bottom{
+    margin-bottom: 5px;
+}
+
+img{
+    max-height: 40px;
+}

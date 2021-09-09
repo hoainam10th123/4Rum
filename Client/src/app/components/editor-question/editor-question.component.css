@@ -1,0 +1,7 @@
+.editor-container {
+    height: 400px;
+  }
+
+.wrap-text{
+  word-wrap: break-word;
+}

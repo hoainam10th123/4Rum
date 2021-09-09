@@ -1,0 +1,41 @@
+<div class="container">
+    <app-site-header></app-site-header>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card border-primary margin-bottom">                
+                <div class="card-body">
+                    <button class="w-100 btn btn-lg btn-success" (click)="askQuestion()">Soạn câu hỏi</button>
+                </div>
+            </div>
+            <div class="card border-primary margin-bottom">
+                <div class="card-header">
+                    <h5 class="card-title text-primary">Câu hỏi gần đây</h5>
+                </div>
+                <div class="card-body">
+                    <ul class="list-group list-group-flush">                        
+                        <li class="list-group-item" *ngFor="let item of questions">
+                            <a routerLink="/detail/{{item.id}}" style="text-decoration: none;">{{item.tittle}}</a> 
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="card border-primary">
+                <div class="card-header">
+                    <h5 class="card-title text-primary">Các ngôn ngữ hổ trợ với markdown</h5>
+                </div>
+                <div class="card-body">
+                    <p class="card-text">
+                        csharp, css, aspnet, autoit, bash, batch, c, cmake, cpp,
+                        dart, docker, fsharp, git, java, javascript, json, jsx,
+                        kotlin, mongodb, nginx, objectivec, pascal, perl, powershell,
+                        prolog, python, regex, ruby, scss, sql, swift, typescript
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-8">
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+    <app-site-footer></app-site-footer>
+</div>

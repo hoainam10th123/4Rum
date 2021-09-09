@@ -1,0 +1,53 @@
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="text-primary">Cú pháp markdown</h4>
+            </div>
+            <div class="card-body">
+                <a target="_blank" href="https://jfcere.github.io/ngx-markdown/cheat-sheet">Hướng dẫn sử dụng cú pháp markdown</a>
+            </div>
+            <alert type="danger">
+                <strong>Lưu ý!</strong> Nhập nội dung vào textarea để soạn câu hỏi theo luật markdown.
+                Danh sách các ngôn ngữ được hổ trợ ở ngoài layout cần ngôn ngữ nào thì copy tên sử dụng
+            </alert>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6">
+        <form [formGroup]="languagesForm" (ngSubmit)="saveQuestion()">
+            <div class="form-floating">
+                <input type="text" [(ngModel)]="titleQuestion" class="form-control" [class.is-invalid]='languagesForm.get("title")!.errors && languagesForm.get("title")!.touched' formControlName='title' id="floatingInput" placeholder="Tiêu đề câu hỏi">
+                <label for="floatingInput">Tiêu đề câu hỏi</label>
+                <div class="invalid-feedback" *ngIf="languagesForm.get('title')!.hasError('required')">Vui lòng không bỏ trống tiêu đề!</div>
+            </div>
+            <div class="form-control" tooltip="Tags ngôn ngữ" placement="top">
+                <select2 [data]="data" [templates]="template" [multiple]="true" 
+                (update)="updateEvent($event)" customSearchEnabled="true"
+                (search)="searchEvent($event)">              
+                    <ng-template #template let-data="data">
+                        <strong>{{data?.name}}</strong>  
+                    </ng-template>              
+                </select2>
+            </div>
+            <div class="mb-3">
+                <textarea formControlName='markdownText' class="form-control" rows="15" [(ngModel)]="markdown"
+                    [class.is-invalid]='languagesForm.get("markdownText")!.errors && languagesForm.get("markdownText")!.touched'></textarea>
+
+                <div class="invalid-feedback" *ngIf="languagesForm.get('markdownText')!.hasError('required')">
+                    Vui lòng không bỏ trống!
+                </div>
+                <div *ngIf="languagesForm.get('markdownText')!.hasError('minlength')" class="invalid-feedback">
+                    Tối thiểu là 6 ký tự !
+                </div>
+            </div>
+            <button type="submit" [disabled]="!languagesForm.valid" class="w-100 btn btn-lg btn-primary">Lưu câu
+                hỏi</button>
+        </form>
+    </div>
+    <div class="col-md-6">
+        <h5 class="text-danger wrap-text">{{titleQuestion}}</h5>
+        <markdown [data]="markdown"></markdown>
+    </div>
+</div>

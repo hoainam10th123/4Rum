@@ -1,0 +1,41 @@
+
+  
+  .form-control-dark {
+    color: #fff;
+    background-color: var(--bs-dark);
+    border-color: var(--bs-gray);
+  }
+  .form-control-dark:focus {
+    color: #fff;
+    background-color: var(--bs-dark);
+    border-color: #fff;
+    box-shadow: 0 0 0 .25rem rgba(255, 255, 255, .25);
+  }
+  
+  .bi {
+    vertical-align: -.125em;
+    fill: currentColor;
+  }
+  
+  .text-small {
+    font-size: 85%;
+  }
+  
+  .dropdown-toggle {
+    outline: 0;
+  }
+  
+  .label{
+    position: absolute;
+    top: -5px;
+    right: -5px;
+}
+
+.scroll-max-height{
+  overflow-y: scroll;
+  max-height: 300px;
+}
+
+.bg-color{
+  background-color: blanchedalmond;
+}

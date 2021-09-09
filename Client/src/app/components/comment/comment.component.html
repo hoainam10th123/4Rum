@@ -1,0 +1,48 @@
+<!-- được gọi trong detail-question.component.html -->
+
+<div class="d-flex" *ngIf="commentParent; else elseBlock" [ngClass]="{'bg-info': commentParentId === commentParent.id}">
+    <div class="margin-right">
+        <img class="rounded-circle" src="{{commentParent.photoUrl || './assets/user.png'}}" alt="">
+    </div>
+    <div class="message-body">
+        <a class="text-primary" style="text-decoration: none;">{{commentParent.displayName}}</a>
+        <span class="child-right" *ngIf="commentParent.userName === userCurrent?.userName && userCurrent">
+            <i class="fa fa-edit" (click)="openModalWithComponent('', true, commentParent)"></i>   
+            <i class="fa fa-close" (click)="openConfirmModal(commentParent.id, true)"></i>            
+        </span>
+        <div><markdown [data]="commentParent.noiDung"></markdown></div>
+        <div>
+            <small>                
+                <span class="text-muted" tooltip="Trả lời lúc {{commentParent.datePosted | date: 'd/M/yyyy, h:mm a'}}"
+                placement="bottom">
+                <i class="fa fa-clock-o"></i> {{commentParent.datePosted | shortDate}}
+            </span>                                
+            </small>
+        </div>                    
+    </div>               
+</div>
+
+<!-- childrent -->
+<ng-template #elseBlock>
+    <div class="d-flex" [ngClass]="{'bg-info': commentChildrentId === commentChildrent?.id}">
+        <div class="margin-right">
+            <img class="rounded-circle" src="{{commentChildrent?.photoUrl || './assets/user.png'}}" alt="">
+        </div>
+        <div class="message-body">
+            <a class="text-primary" style="text-decoration: none;">{{commentChildrent?.displayName}}</a>
+            <span class="child-right" *ngIf="commentChildrent?.userName === userCurrent?.userName && userCurrent">
+                <i class="fa fa-edit" (click)="edit(commentChildrent)"></i>   
+                <i class="fa fa-close" (click)="openConfirmModal(commentChildrent?.id, false)"></i>            
+            </span>
+            <div>{{commentChildrent?.noiDung}}</div>
+            <div>
+                <small>                
+                    <span class="text-muted" 
+                    tooltip="Trả lời lúc {{commentChildrent?.datePosted | date: 'd/M/yyyy, h:mm a'}}" placement="bottom">
+                        <i class="fa fa-clock-o"></i> {{commentChildrent?.datePosted | shortDate}}
+                    </span>                                
+                </small>
+            </div>                    
+        </div>               
+    </div>
+</ng-template>

@@ -1,0 +1,22 @@
+<!-- được gọi trong detail-question.component.html -->
+<ul style="list-style: none; padding-left: 40px;" >
+    <li class="margin" *ngFor="let nestItem of commentParent?.childrentComments">
+        <app-comment 
+            (editChildCommentEvent)="editChildCommentMode($event)" 
+            [commentChildrent]="nestItem"
+            [commentChildrentId]="commentChildrentId">
+        </app-comment>
+    </li>
+    <li class="margin" *ngIf="accountService.currentUser$ | async">
+        <div class="text-danger" *ngIf="!isDisplay" (click)="isDisplay = !isDisplay"> Bình luận </div>
+        <form *ngIf="isDisplay" [formGroup]="cmtForm" autocomplete="off" (ngSubmit)="submitChildComment()">                            
+            <div class="input-group">
+                <input type="text" formControlName='content' name="content" [(ngModel)]="content" class="form-control input-sm"
+                    placeholder="Bình luận...">            
+                <div class="input-group-append">
+                    <button [disabled]="!cmtForm.valid" class="btn btn-primary" type="submit">Lưu</button>
+                </div>
+            </div>        
+        </form>
+    </li>
+</ul>

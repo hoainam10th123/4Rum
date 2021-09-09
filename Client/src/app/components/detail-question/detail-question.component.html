@@ -1,0 +1,60 @@
+<div class="card border-success">
+    <div class="card-header">
+        <div class="d-flex">
+            <div>
+                <img src="{{question.photoUrl || './assets/user.png'}}" class="rounded-circle" alt="" tooltip="{{question.displayName}}" placement="right">
+            </div>
+            <div class="text-truncate">
+                <h6 class="card-title text-primary" tooltip="{{question.tittle}}" placement="top"
+                    style="margin-bottom: 0px;">
+                    {{question.tittle}}
+                </h6>
+
+                <div class="text-muted" tooltip="đặt câu hỏi lúc {{question.datePosted | date: 'd/M/yyyy, h:mm a'}}" placement="bottom">{{question.datePosted | shortDate}}</div>
+            </div>
+            <div class="child-right" *ngIf="question.userName === userCurrent?.userName && userCurrent">
+                <div class="btn-group" dropdown>
+                    <a id="button-action" dropdownToggle class="link-dark text-decoration-none dropdown-toggle"
+                        aria-controls="dropdown-action">
+                        <span class="caret"></span>
+                    </a>
+                    <ul id="dropdown-action" *dropdownMenu class="dropdown-menu dropdown-menu-right" role="menu"
+                        aria-labelledby="button-action">
+                        <li role="menuitem" routerLink="/edit/{{question.id}}">
+                            <a class="dropdown-item"><i class="fa fa-edit"></i> Edit</a>
+                        </li>
+                        <li role="menuitem" (click)="openConfirmModal(question.id)">
+                            <a class="dropdown-item">
+                                <i class="fa fa-trash"></i> Delete
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card-header">
+        <span class="bg-success text-white pd-5 margin-right">{{question.viewCount | viewNumber}} lượt xem</span>
+        <span class="bg-success text-white pd-5 margin-right">{{question.commentParents.length}} trả lời</span>
+    </div>
+    <div class="card-body">
+        <markdown [data]="question.noiDung"></markdown>
+        <!-- <p class="card-text">{{question.noiDung}}</p> -->
+    </div>
+    <div class="card-footer" *ngIf="question.questionTags.length > 0">
+        <span class="bg-info margin-right text-white pd-5" *ngFor="let tag of question.questionTags">{{tag.laguageName}}</span>
+    </div>
+    <div class="card-footer">
+        <ul class="non-list-style">
+            <li class="margin" *ngFor="let item of question.commentParents">
+                <app-comment [commentParent]="item" ></app-comment>
+                <!-- nest comment -->
+                <app-comment-childrent [question]="question" [commentParent]="item"></app-comment-childrent>
+            </li>
+
+            <li class="margin" *ngIf="accountService.currentUser$ | async">
+                <button class="btn btn-primary" (click)="openModalWithComponent(question.id, false, null)">Trả lời</button>
+            </li>
+        </ul>
+    </div>
+</div>
